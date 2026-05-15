@@ -3,12 +3,6 @@
   if (window.__demoBannerLoaded) return;
   window.__demoBannerLoaded = true;
 
-  const path = window.location.pathname;
-  const m = path.match(/^\/([^\/]+)\/?$/);
-  if (!m) return;
-  const folder = decodeURIComponent(m[1]);
-  if (!folder || folder === 'index.html' || folder.startsWith('.')) return;
-
   /* Curated order + per-run metadata. Keep in sync with index.html builds[]. */
   const RUNS = [
     { folder: 'impeccable',             model: 'opus 4.7',     skill: 'impeccable' },
@@ -25,14 +19,21 @@
     { folder: 'qwen3.6',                model: 'qwen 3.6+',    skill: 'frontend-design' },
   ];
 
+  /* Match the LAST path segment so this works at any mount point
+     (e.g. localhost:4000/foo/ AND franpiaggio.github.io/one-prompt-twelve-runs/foo/). */
+  const path = window.location.pathname;
+  const m = path.match(/\/([^\/]+)\/?$/);
+  if (!m) return;
+  const folder = decodeURIComponent(m[1]);
+  if (!folder || folder.endsWith('.html') || folder.startsWith('.')) return;
+
   const idx = RUNS.findIndex((r) => r.folder === folder);
-  const known = idx >= 0;
-  const current = known ? RUNS[idx] : null;
-  const prev = known ? RUNS[(idx - 1 + RUNS.length) % RUNS.length] : null;
-  const next = known ? RUNS[(idx + 1) % RUNS.length] : null;
-  const rank = known
-    ? `${String(idx + 1).padStart(2, '0')} / ${String(RUNS.length).padStart(2, '0')}`
-    : null;
+  if (idx < 0) return; /* not a known demo (could be the index itself, or anything else) */
+
+  const current = RUNS[idx];
+  const prev = RUNS[(idx - 1 + RUNS.length) % RUNS.length];
+  const next = RUNS[(idx + 1) % RUNS.length];
+  const rank = `${String(idx + 1).padStart(2, '0')} / ${String(RUNS.length).padStart(2, '0')}`;
 
   const ease = 'cubic-bezier(0.16, 1, 0.3, 1)';
 

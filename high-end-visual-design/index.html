@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Francisco Piaggio — Frontend Engineer &amp; Creative Coder</title>
+  <meta name="description" content="Frontend engineer and creative coder from Buenos Aires, Argentina." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Fixed, pointer-events-none film grain overlay (performance-safe) -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Fixed mesh gradient background (no scroll-bound paints) -->
+  <div class="mesh" aria-hidden="true">
+    <span class="orb orb-indigo"></span>
+    <span class="orb orb-emerald"></span>
+    <span class="orb orb-amber"></span>
+    <span class="grid-lines"></span>
+  </div>
+
+  <!-- ──────────────  Fluid Island Nav  ────────────── -->
+  <header class="nav-wrap" data-reveal>
+    <nav class="nav" aria-label="Primary">
+      <a href="#top" class="nav-mark" aria-label="Francisco Piaggio — home">
+        <span class="mark-glyph">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1" aria-hidden="true">
+            <path d="M5 19 L5 5 L19 5" stroke-linecap="round" />
+            <path d="M5 12 L15 12" stroke-linecap="round" />
+          </svg>
+        </span>
+        <span class="mark-text">
+          <span class="mark-name">Piaggio</span>
+          <span class="mark-meta">est. 1992 · BA</span>
+        </span>
+      </a>
+
+      <ul class="nav-links" role="list">
+        <li><a href="#work">Index</a></li>
+        <li><a href="#notes">Notes</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <a href="#contact" class="nav-cta" data-magnetic>
+        <span class="cta-label">Get in touch</span>
+        <span class="cta-icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25">
+            <path d="M4 12 L12 4" stroke-linecap="round" />
+            <path d="M6 4 L12 4 L12 10" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+      </a>
+
+      <button class="nav-burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span class="burger-line burger-line-1"></span>
+        <span class="burger-line burger-line-2"></span>
+      </button>
+    </nav>
+  </header>
+
+  <!-- ──────────────  Mobile Modal Menu  ────────────── -->
+  <div id="mobile-menu" class="mobile-menu" aria-hidden="true">
+    <div class="mobile-menu-inner">
+      <ul role="list">
+        <li style="--d:80ms"><a href="#top">Index</a></li>
+        <li style="--d:140ms"><a href="#work">Work</a></li>
+        <li style="--d:200ms"><a href="#notes">Notes</a></li>
+        <li style="--d:260ms"><a href="#contact">Contact</a></li>
+      </ul>
+      <div class="mobile-menu-foot" style="--d:340ms">
+        <span>Buenos Aires · -34.6°,-58.4°</span>
+        <a href="mailto:fpiaggio92@gmail.com">fpiaggio92@gmail.com</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ──────────────  Hero (Editorial Split)  ────────────── -->
+  <main id="top">
+    <section class="hero">
+      <div class="hero-grid">
+
+        <!-- LEFT — Identity -->
+        <div class="hero-left">
+          <div class="eyebrow" data-reveal>
+            <span class="eyebrow-dot"></span>
+            <span>Personal · Portfolio · MMXXVI</span>
+          </div>
+
+          <h1 class="display" data-reveal data-reveal-delay="80">
+            <span class="d-row d-row-1"><span class="d-word">Francisco</span></span>
+            <span class="d-row d-row-2"><span class="d-word">Piaggio<span class="d-period">.</span></span></span>
+          </h1>
+
+          <div class="roles" data-reveal data-reveal-delay="240">
+            <span class="role-primary">
+              <span class="role-num">01 —</span>
+              Senior Frontend Engineer
+            </span>
+            <span class="role-divider" aria-hidden="true"></span>
+            <span class="role-secondary">
+              <span class="role-num">02 —</span>
+              <em>Creative</em> Coder
+            </span>
+          </div>
+
+          <p class="tagline" data-reveal data-reveal-delay="360">
+            <span class="quote-mark" aria-hidden="true">“</span>Building scalable, high-performance web applications
+            with <em>clean architecture</em> and pixel-perfect interfaces.<span class="quote-mark close" aria-hidden="true">”</span>
+          </p>
+
+          <div class="hero-cta-row" data-reveal data-reveal-delay="480">
+            <a href="#contact" class="btn-primary" data-magnetic>
+              <span class="btn-label">Start a conversation</span>
+              <span class="btn-icon" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.25">
+                  <path d="M4 12 L12 4" stroke-linecap="round" />
+                  <path d="M6 4 L12 4 L12 10" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+              </span>
+            </a>
+
+            <a href="#work" class="btn-ghost">
+              <span class="ghost-dot" aria-hidden="true"></span>
+              <span>Selected work, 2018 — present</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- RIGHT — Identity cluster (Z-axis kissed) -->
+        <aside class="hero-right" aria-label="At a glance">
+
+          <!-- Avatar bezel -->
+          <figure class="avatar-shell" data-reveal data-reveal-delay="120">
+            <div class="avatar-core">
+              <div class="avatar-img-wrap" role="img" aria-label="Francisco Piaggio">
+                <!-- Layered fallback (rendered always; image fades over it once loaded) -->
+                <div class="avatar-fallback" aria-hidden="true">
+                  <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+                    <defs>
+                      <radialGradient id="fg-spot" cx="50%" cy="35%" r="65%">
+                        <stop offset="0%"  stop-color="#1a1a22"/>
+                        <stop offset="55%" stop-color="#0e0e12"/>
+                        <stop offset="100%" stop-color="#07070a"/>
+                      </radialGradient>
+                      <linearGradient id="fg-glow" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="rgba(139,142,240,0.55)"/>
+                        <stop offset="100%" stop-color="rgba(139,142,240,0)"/>
+                      </linearGradient>
+                      <linearGradient id="fg-mono" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#f6f4ef"/>
+                        <stop offset="100%" stop-color="#b8b5ab"/>
+                      </linearGradient>
+                      <filter id="fg-blur"><feGaussianBlur stdDeviation="22"/></filter>
+                    </defs>
+                    <rect width="400" height="500" fill="url(#fg-spot)"/>
+                    <!-- atmospheric blooms -->
+                    <circle cx="120" cy="180" r="160" fill="url(#fg-glow)" filter="url(#fg-blur)" opacity="0.7"/>
+                    <circle cx="320" cy="380" r="120" fill="rgba(111,218,176,0.22)" filter="url(#fg-blur)" opacity="0.7"/>
+                    <!-- subtle vertical scan lines -->
+                    <g opacity="0.06" stroke="#fff" stroke-width="1">
+                      <line x1="0"   y1="0" x2="0"   y2="500"/>
+                      <line x1="100" y1="0" x2="100" y2="500"/>
+                      <line x1="200" y1="0" x2="200" y2="500"/>
+                      <line x1="300" y1="0" x2="300" y2="500"/>
+                      <line x1="400" y1="0" x2="400" y2="500"/>
+                    </g>
+                    <!-- Monogram FP. with serif period -->
+                    <text x="200" y="290"
+                          text-anchor="middle"
+                          font-family="Geist, ui-sans-serif"
+                          font-size="220"
+                          font-weight="500"
+                          letter-spacing="-12"
+                          fill="url(#fg-mono)">FP</text>
+                    <text x="318" y="290"
+                          font-family="Instrument Serif, serif"
+                          font-style="italic"
+                          font-size="240"
+                          fill="#8b8ef0">.</text>
+                    <!-- tag -->
+                    <g font-family="Geist Mono, ui-monospace" font-size="14" letter-spacing="3" fill="rgba(243,241,236,0.46)">
+                      <text x="200" y="360" text-anchor="middle">PORTRAIT · PLACEHOLDER</text>
+                    </g>
+                    <!-- corner hairlines -->
+                    <g stroke="rgba(255,255,255,0.18)" stroke-width="1" fill="none">
+                      <path d="M16 16 L16 40 M16 16 L40 16"/>
+                      <path d="M384 16 L384 40 M384 16 L360 16"/>
+                      <path d="M16 484 L16 460 M16 484 L40 484"/>
+                      <path d="M384 484 L384 460 M384 484 L360 484"/>
+                    </g>
+                  </svg>
+                </div>
+                <img src="profile.png" alt="" loading="eager" decoding="async" />
+              </div>
+              <figcaption class="avatar-cap">
+                <span class="cap-dot"></span>
+                <span>Live · Available · Q3 2026</span>
+              </figcaption>
+            </div>
+          </figure>
+
+          <!-- Now @ Deel — accordion-like double bezel -->
+          <a class="now-card" href="https://www.deel.com" target="_blank" rel="noopener" data-reveal data-reveal-delay="200" data-magnetic>
+            <div class="now-shell">
+              <div class="now-core">
+                <div class="now-row now-row-top">
+                  <span class="now-eyebrow"><span class="pulse"></span>Currently</span>
+                  <span class="now-meta">2023 →</span>
+                </div>
+                <div class="now-row now-row-mid">
+                  <span class="now-company">Deel</span>
+                  <span class="now-arrow" aria-hidden="true">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+                      <path d="M4 12 L12 4" stroke-linecap="round" />
+                      <path d="M6 4 L12 4 L12 10" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                  </span>
+                </div>
+                <p class="now-sub">Building global payroll &amp; HR infrastructure for distributed teams across 150+ countries.</p>
+              </div>
+            </div>
+          </a>
+
+          <!-- Location chip -->
+          <div class="loc-chip" data-reveal data-reveal-delay="280">
+            <div class="loc-shell">
+              <div class="loc-core">
+                <span class="loc-icon" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.1">
+                    <path d="M8 14 C 8 14 13 9.5 13 6 A5 5 0 0 0 3 6 C 3 9.5 8 14 8 14 Z" stroke-linejoin="round"/>
+                    <circle cx="8" cy="6" r="1.6" />
+                  </svg>
+                </span>
+                <span class="loc-text">
+                  <span class="loc-city">Buenos Aires</span>
+                  <span class="loc-country">Argentina · GMT-3</span>
+                </span>
+                <span class="loc-time" id="loc-time" aria-live="polite">— : —</span>
+              </div>
+            </div>
+          </div>
+
+        </aside>
+
+      </div>
+
+      <!-- Footnote rail -->
+      <div class="hero-rail" data-reveal data-reveal-delay="600">
+        <span class="rail-item"><span class="rail-num">A</span>Scroll to inspect</span>
+        <span class="rail-separator" aria-hidden="true"></span>
+        <span class="rail-item"><span class="rail-num">B</span>v.06 · last touch 2026.05</span>
+        <span class="rail-separator" aria-hidden="true"></span>
+        <span class="rail-item rail-item-end"><span class="rail-num">C</span>Crafted in 16,384 keystrokes</span>
+      </div>
+    </section>
+
+    <!-- ──────────────  Contact (peer links)  ────────────── -->
+    <section id="contact" class="contact">
+      <div class="contact-head" data-reveal>
+        <div class="eyebrow">
+          <span class="eyebrow-dot"></span>
+          <span>03 · Direct lines</span>
+        </div>
+        <h2 class="section-title">
+          Pick a channel.<br/>
+          <em>Reply within 24h.</em>
+        </h2>
+      </div>
+
+      <div class="contact-grid">
+
+        <a class="ch-card" href="https://github.com/franpiaggio" target="_blank" rel="noopener" data-reveal data-reveal-delay="80" data-magnetic>
+          <div class="ch-shell">
+            <div class="ch-core">
+              <div class="ch-top">
+                <span class="ch-num">/ 01</span>
+                <span class="ch-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M4 12 L12 4" stroke-linecap="round" />
+                    <path d="M6 4 L12 4 L12 10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </div>
+              <div class="ch-mid">
+                <span class="ch-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1">
+                    <path d="M9 19c-4 1.5-4-2-6-2.5M15 22v-3.5a3 3 0 0 0-.9-2.3c3-.3 6-1.5 6-6.5a5 5 0 0 0-1.4-3.5 4.6 4.6 0 0 0-.1-3.4S17.2 2 14.5 3.8a13 13 0 0 0-7 0C4.8 2 3.9 2.3 3.9 2.3a4.6 4.6 0 0 0-.1 3.4A5 5 0 0 0 2.4 9.2c0 5 3 6.2 6 6.5a3 3 0 0 0-.9 2.3V22" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="ch-name">GitHub</span>
+              </div>
+              <div class="ch-bot">
+                <span>franpiaggio</span>
+                <span class="ch-hint">Repos, sketches, experiments</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="ch-card" href="https://x.com/fipiaggio" target="_blank" rel="noopener" data-reveal data-reveal-delay="160" data-magnetic>
+          <div class="ch-shell">
+            <div class="ch-core">
+              <div class="ch-top">
+                <span class="ch-num">/ 02</span>
+                <span class="ch-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M4 12 L12 4" stroke-linecap="round" />
+                    <path d="M6 4 L12 4 L12 10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </div>
+              <div class="ch-mid">
+                <span class="ch-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1">
+                    <path d="M4 4 L11 13 L4.5 20 M13 4 L20 4 L11.5 13.5 L20 20 L13 20 L4 4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="ch-name">X · Twitter</span>
+              </div>
+              <div class="ch-bot">
+                <span>@fipiaggio</span>
+                <span class="ch-hint">Process notes, fleeting ideas</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+        <a class="ch-card" href="mailto:fpiaggio92@gmail.com" data-reveal data-reveal-delay="240" data-magnetic>
+          <div class="ch-shell">
+            <div class="ch-core">
+              <div class="ch-top">
+                <span class="ch-num">/ 03</span>
+                <span class="ch-arrow" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.2">
+                    <path d="M4 12 L12 4" stroke-linecap="round" />
+                    <path d="M6 4 L12 4 L12 10" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </span>
+              </div>
+              <div class="ch-mid">
+                <span class="ch-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.1">
+                    <rect x="3" y="5" width="18" height="14" rx="2.2" stroke-linejoin="round"/>
+                    <path d="M3.6 6.4 L12 13 L20.4 6.4" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                <span class="ch-name">Email</span>
+              </div>
+              <div class="ch-bot">
+                <span>fpiaggio92@gmail.com</span>
+                <span class="ch-hint">Long form, brief form, both fine</span>
+              </div>
+            </div>
+          </div>
+        </a>
+
+      </div>
+    </section>
+
+    <!-- ──────────────  Footer  ────────────── -->
+    <footer class="foot" data-reveal>
+      <div class="foot-grid">
+        <div class="foot-cell">
+          <span class="foot-key">Mark</span>
+          <span class="foot-val foot-mark">FP<span class="foot-mark-dot">.</span></span>
+        </div>
+        <div class="foot-cell">
+          <span class="foot-key">Built</span>
+          <span class="foot-val">Hand-coded · No frameworks · 2026</span>
+        </div>
+        <div class="foot-cell">
+          <span class="foot-key">Colophon</span>
+          <span class="foot-val">Geist &amp; Instrument Serif · OLED black</span>
+        </div>
+        <div class="foot-cell foot-cell-end">
+          <span class="foot-key">©</span>
+          <span class="foot-val">Francisco Piaggio · MMXXVI</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <script src="main.js" defer></script>
+<script src="../shared/banner.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francisco Piaggio — Frontend Engineer & Creative Coder</title>
+    <meta name="description" content="Frontend engineer and creative coder from Buenos Aires, Argentina.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #faf9f7;
+            --bg-secondary: #f0eeeb;
+            --text-primary: #1a1a1a;
+            --text-secondary: #5c5c5c;
+            --accent: #c9453a;
+            --accent-hover: #a3382d;
+            --spacing-unit: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(201, 69, 58, 0.03) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(201, 69, 58, 0.02) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.025;
+            pointer-events: none;
+            z-index: 1000;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 calc(var(--spacing-unit) * 6);
+            position: relative;
+            z-index: 1;
+        }
+
+        header {
+            padding: calc(var(--spacing-unit) * 8) 0;
+            border-bottom: 1px solid var(--bg-secondary);
+            opacity: 0;
+            animation: fadeSlideIn 0.8s ease-out 0.2s forwards;
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 5);
+        }
+
+        .avatar {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+            border: 3px solid var(--text-primary);
+            box-shadow: 8px 8px 0 var(--text-primary);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease;
+        }
+
+        .avatar:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 11px 11px 0 var(--text-primary);
+        }
+
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: grayscale(20%);
+            transition: filter 0.4s ease;
+        }
+
+        .avatar:hover img {
+            filter: grayscale(0%);
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .mono-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.03em;
+            margin-bottom: calc(var(--spacing-unit) * 2);
+        }
+
+        .roles {
+            display: flex;
+            flex-wrap: wrap;
+            gap: calc(var(--spacing-unit) * 2);
+            margin-bottom: calc(var(--spacing-unit) * 3);
+        }
+
+        .role {
+            font-size: 1.25rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .role::after {
+            content: '·';
+            margin-left: calc(var(--spacing-unit) * 2);
+            color: var(--accent);
+        }
+
+        .role:last-child::after {
+            display: none;
+        }
+
+        .role.secondary {
+            color: var(--text-secondary);
+        }
+
+        main {
+            padding: calc(var(--spacing-unit) * 12) 0;
+        }
+
+        .hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: calc(var(--spacing-unit) * 10);
+            align-items: start;
+        }
+
+        .hero-left {
+            opacity: 0;
+            animation: fadeSlideIn 0.8s ease-out 0.4s forwards;
+        }
+
+        .tagline {
+            font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+            font-weight: 400;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 6);
+            max-width: 480px;
+        }
+
+        .tagline em {
+            font-style: italic;
+            color: var(--text-primary);
+        }
+
+        .employment {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 2);
+            padding: calc(var(--spacing-unit) * 3) calc(var(--spacing-unit) * 4);
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent);
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+
+        .employment:hover {
+            background: #e8e6e3;
+            transform: translateX(4px);
+        }
+
+        .employment-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-secondary);
+            margin-bottom: 4px;
+        }
+
+        .employment-company {
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: var(--text-primary);
+            transition: color 0.2s ease;
+        }
+
+        .employment-company:hover {
+            color: var(--accent);
+        }
+
+        .hero-right {
+            opacity: 0;
+            animation: fadeSlideIn 0.8s ease-out 0.6s forwards;
+        }
+
+        .info-block {
+            margin-bottom: calc(var(--spacing-unit) * 8);
+        }
+
+        .info-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--text-secondary);
+            margin-bottom: calc(var(--spacing-unit) * 2);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .info-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--bg-secondary);
+        }
+
+        .location-text {
+            font-size: 2rem;
+            font-weight: 500;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: calc(var(--spacing-unit) * 2);
+        }
+
+        .contact-link {
+            display: flex;
+            align-items: center;
+            gap: calc(var(--spacing-unit) * 3);
+            padding: calc(var(--spacing-unit) * 2) 0;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 1.125rem;
+            font-weight: 500;
+            transition: color 0.2s ease, gap 0.3s ease;
+            border-bottom: 1px solid var(--bg-secondary);
+        }
+
+        .contact-link:hover {
+            color: var(--accent);
+            gap: calc(var(--spacing-unit) * 4);
+        }
+
+        .contact-link:last-child {
+            border-bottom: none;
+        }
+
+        .link-arrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            opacity: 0;
+            transform: translateX(-8px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .contact-link:hover .link-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .contact-link span {
+            flex: 1;
+        }
+
+        .link-url {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            transition: color 0.2s ease;
+        }
+
+        .contact-link:hover .link-url {
+            color: var(--accent);
+        }
+
+        footer {
+            padding: calc(var(--spacing-unit) * 8) 0;
+            border-top: 1px solid var(--bg-secondary);
+            opacity: 0;
+            animation: fadeSlideIn 0.8s ease-out 0.8s forwards;
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: calc(var(--spacing-unit) * 4);
+        }
+
+        .footer-link {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text-primary);
+        }
+
+        @keyframes fadeSlideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                gap: calc(var(--spacing-unit) * 8);
+            }
+
+            .tagline {
+                max-width: 100%;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                gap: calc(var(--spacing-unit) * 3);
+                text-align: center;
+            }
+
+            .roles {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+
+    <header>
+        <div class="container">
+            <div class="header-inner">
+                <div class="avatar">
+                    <img src="../profile.png" alt="Francisco Piaggio">
+                </div>
+                <div class="header-content">
+                    <p class="mono-text">Portfolio</p>
+                    <h1>Francisco Piaggio</h1>
+                    <div class="roles">
+                        <span class="role primary">Senior Frontend Engineer</span>
+                        <span class="role secondary">Creative Coder</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <div class="hero-left">
+                    <p class="tagline">Building scalable, high-performance web applications with clean architecture and <em>pixel-perfect interfaces</em>.</p>
+
+                    <div class="employment">
+                        <div>
+                            <p class="employment-label">Currently working at</p>
+                            <a href="https://www.deel.com" target="_blank" rel="noopener noreferrer" class="employment-company">Deel</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-right">
+                    <div class="info-block">
+                        <p class="info-label">Location</p>
+                        <p class="location-text">Buenos Aires, Argentina</p>
+                    </div>
+
+                    <div class="info-block">
+                        <p class="info-label">Get in touch</p>
+                        <div class="contact-links">
+                            <a href="https://github.com/franpiaggio" target="_blank" rel="noopener noreferrer" class="contact-link">
+                                <span class="link-arrow">→</span>
+                                <span>GitHub</span>
+                                <span class="link-url">github.com/franpiaggio</span>
+                            </a>
+                            <a href="https://x.com/fipiaggio" target="_blank" rel="noopener noreferrer" class="contact-link">
+                                <span class="link-arrow">→</span>
+                                <span>X / Twitter</span>
+                                <span class="link-url">@fipiaggio</span>
+                            </a>
+                            <a href="mailto:fpiaggio92@gmail.com" class="contact-link">
+                                <span class="link-arrow">→</span>
+                                <span>Email</span>
+                                <span class="link-url">fpiaggio92@gmail.com</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-inner">
+                <p class="footer-text">© 2026 Francisco Piaggio</p>
+                <div class="footer-links">
+                    <a href="https://github.com/franpiaggio" target="_blank" rel="noopener noreferrer" class="footer-link">GitHub</a>
+                    <a href="https://x.com/fipiaggio" target="_blank" rel="noopener noreferrer" class="footer-link">Twitter</a>
+                    <a href="mailto:fpiaggio92@gmail.com" class="footer-link">Email</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+<script src="../shared/banner.js" defer></script>
+</body>
+</html>

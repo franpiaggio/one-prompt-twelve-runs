@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+
+# Claude Code / agents workspace state
+.claude/
+.agents/
+
+# Node modules / build artifacts
+node_modules/
+*.log
+
+# Legacy / intermediate images (superseded by profile.png + previews/)
+/avatar.jpg
+/avatar1.JPEG
+/profile.JPEG
+/*.png
+!/profile.png
+
+# Old per-run image leftovers in subfolders (run folders only use profile.png now)
+**/avatar.jpg
+**/avatar1.JPEG
+**/profile.JPEG
+
+# Editor caches
+.vscode/
+.idea/

@@ -132,6 +132,11 @@
       gap: 0.65rem;
       color: rgba(20, 20, 22, 0.95);
     }
+    .__rb-home-label {
+      color: rgba(20, 20, 22, 0.9);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
     .__rb-rank {
       color: rgba(20, 20, 22, 0.42);
       font-size: 10px;
@@ -177,6 +182,7 @@
     .__rb-dock[data-bg="light"] .__rb-next:hover .__rb-icon,
     .__rb-dock[data-bg="light"] .__rb-home:hover .__rb-icon { background: rgba(255, 255, 255, 0.16); }
     .__rb-dock[data-bg="light"] .__rb-home { color: rgba(245, 245, 244, 0.95); }
+    .__rb-dock[data-bg="light"] .__rb-home-label { color: rgba(245, 245, 244, 0.92); }
     .__rb-dock[data-bg="light"] .__rb-rank { color: rgba(245, 245, 244, 0.42); }
     .__rb-dock[data-bg="light"] .__rb-sep { color: rgba(245, 245, 244, 0.22); }
     .__rb-dock[data-bg="light"] .__rb-model { color: rgba(245, 245, 244, 1); }
@@ -281,11 +287,12 @@
     }
 
     let homeInner =
-      '<span class="__rb-icon" aria-hidden="true">' + gridIcon + '</span>';
+      '<span class="__rb-icon" aria-hidden="true">' + gridIcon + '</span>' +
+      '<span class="__rb-home-label">Index</span>';
     if (rank) {
-      homeInner += '<span class="__rb-rank"></span><span class="__rb-sep">·</span>';
+      homeInner += '<span class="__rb-sep">·</span><span class="__rb-rank"></span>';
     }
-    homeInner += '<span class="__rb-model"></span>';
+    homeInner += '<span class="__rb-sep">·</span><span class="__rb-model"></span>';
     if (current) {
       homeInner += '<span class="__rb-sep">/</span><span class="__rb-skill"></span>';
     }
@@ -326,6 +333,23 @@
     document.body.appendChild(dock);
     requestAnimationFrame(() => {
       requestAnimationFrame(() => dock.classList.add('__rb-in'));
+    });
+
+    /* keyboard navigation: ← prev, → next, Esc index */
+    document.addEventListener('keydown', (e) => {
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      const t = e.target;
+      if (t && t.matches && t.matches('input, textarea, select, [contenteditable], [contenteditable=""], [contenteditable="true"]')) return;
+      if (e.key === 'ArrowLeft' && prev) {
+        e.preventDefault();
+        window.location.href = '../' + encodeURIComponent(prev.folder) + '/';
+      } else if (e.key === 'ArrowRight' && next) {
+        e.preventDefault();
+        window.location.href = '../' + encodeURIComponent(next.folder) + '/';
+      } else if (e.key === 'Escape') {
+        e.preventDefault();
+        window.location.href = '../';
+      }
     });
   }
 

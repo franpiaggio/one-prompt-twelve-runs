@@ -1,0 +1,505 @@
+/* ===================================================================
+   Slides: One prompt, twelve renderings
+   Square 1080×1080 surfaces for LinkedIn carousel
+   Design: Restrained palette, editorial typography, screenshot-forward
+   =================================================================== */
+
+:root {
+  --bg:            oklch(0.97 0.005 75);
+  --surface:       oklch(0.99 0.005 75);
+  --ink:           oklch(0.18 0.015 65);
+  --ink-2:         oklch(0.28 0.012 65);
+  --ink-mute:      oklch(0.5 0.012 70);
+  --ink-dim:       oklch(0.68 0.008 70);
+  --hairline:      oklch(0.9 0.008 70);
+  --hairline-2:    oklch(0.83 0.012 70);
+  --accent:        oklch(0.62 0.16 35);
+  --ease:          cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  background: oklch(0.93 0.005 75);
+  color: var(--ink);
+  font-family: 'Geist', system-ui, -apple-system, sans-serif;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* capture mode: render the slide at exact pixel size, no chrome */
+body.is-capture {
+  display: block;
+  margin: 0;
+  padding: 0;
+  width: 1080px;
+  height: 1080px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+.slide-wrap {
+  width: 1080px;
+  height: 1080px;
+  position: relative;
+  flex: 0 0 auto;
+  transform: scale(var(--slide-scale, 1));
+  transform-origin: center;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+/* film grain overlay */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='220' height='220' filter='url(%23n)'/></svg>");
+  opacity: 0.04;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+}
+
+/* soft ambient glow */
+.slide::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(60% 50% at 25% -5%, rgba(255, 255, 255, 0.7), transparent 60%),
+    radial-gradient(40% 30% at 90% 100%, rgba(0, 0, 0, 0.05), transparent 65%);
+  pointer-events: none;
+}
+
+/* ============================================================
+   INTRO SLIDE
+   ============================================================ */
+.slide--intro {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.slide--intro > * { position: relative; z-index: 1; }
+
+.intro-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 8px 16px 8px 12px;
+  border: 1px solid var(--hairline-2);
+  border-radius: 999px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 14px;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin-bottom: 56px;
+}
+.intro-kicker::before {
+  content: '';
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px oklch(0.62 0.16 35 / 0.55);
+}
+
+.intro-title {
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: 124px;
+  line-height: 0.93;
+  letter-spacing: -0.045em;
+  color: var(--ink);
+  margin-bottom: 40px;
+}
+.intro-title span { display: block; }
+.intro-title .em {
+  font-weight: 500;
+  font-style: italic;
+  color: var(--ink-mute);
+  letter-spacing: -0.035em;
+}
+
+.intro-subtitle {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--ink-mute);
+  max-width: 28ch;
+  margin: 0 auto 64px;
+}
+
+.intro-stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.intro-stats .stat {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+}
+.intro-stats .stat__n {
+  font-family: 'Geist', sans-serif;
+  font-size: 36px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.intro-stats .stat__l { color: var(--ink-mute); }
+.intro-stats .sep {
+  width: 1px; height: 22px; background: var(--hairline-2);
+}
+
+/* byline pinned to bottom */
+.intro-byline {
+  position: absolute;
+  left: 64px; right: 64px; bottom: 56px;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: 'Geist Mono', monospace;
+  font-size: 12px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.intro-byline strong {
+  color: var(--ink-2);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+}
+
+/* ============================================================
+   RUN SLIDE
+   ============================================================ */
+.slide--run > * { position: relative; z-index: 1; }
+
+.run-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  height: 160px;
+  flex: 0 0 auto;
+}
+
+.run-num {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  font-family: 'Geist Mono', monospace;
+  font-variant-numeric: tabular-nums;
+  color: var(--ink);
+}
+.run-num__n {
+  font-size: 96px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 0.9;
+}
+.run-num__total {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--ink-dim);
+  letter-spacing: 0;
+  padding-bottom: 4px;
+}
+
+.run-meta {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding-top: 6px;
+}
+.run-field {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+.run-field__label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+}
+.run-field__model {
+  font-family: 'Geist', sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+.run-field__skill {
+  font-family: 'Geist Mono', monospace;
+  font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  color: var(--ink-mute);
+}
+
+.run-screen {
+  flex: 0 0 auto;
+  margin: 36px 0 36px;
+  width: 952px;
+  height: 595px; /* 16:10 */
+  align-self: center;
+  padding: 6px;
+  background: oklch(0.93 0.008 70);
+  border: 1px solid var(--hairline-2);
+  border-radius: 20px;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 28px 56px -28px rgba(0, 0, 0, 0.22),
+    0 8px 22px -10px rgba(0, 0, 0, 0.1);
+}
+.run-screen__inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  overflow: hidden;
+  position: relative;
+  background: oklch(0.95 0.005 70);
+  box-shadow:
+    inset 0 1px 1px rgba(255, 255, 255, 0.7),
+    inset 0 0 0 1px oklch(0.85 0.01 70);
+}
+.run-screen__img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.run-footer {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 32px;
+}
+
+.run-progress {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.run-progress__dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--hairline-2);
+}
+.run-progress__dot.is-active {
+  width: 24px;
+  border-radius: 4px;
+  background: var(--ink);
+}
+
+.run-brand {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.run-brand__title {
+  font-family: 'Geist', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+}
+.run-brand__url {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+}
+
+/* ============================================================
+   OVERVIEW PAGE (index.html)
+   ============================================================ */
+.overview-page {
+  display: block;
+  overflow: auto;
+  background: oklch(0.96 0.005 75);
+}
+.overview-page main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4rem) clamp(1.25rem, 3vw, 2rem);
+}
+.overview-page h1 {
+  font-family: 'Geist', sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  margin-bottom: 0.6rem;
+}
+.overview-page .lede {
+  color: var(--ink-mute);
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  max-width: 60ch;
+}
+.overview-page .lede a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--hairline-2);
+}
+.overview-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 3rem;
+}
+.overview-card {
+  background: var(--surface);
+  border: 1px solid var(--hairline);
+  border-radius: 14px;
+  padding: 18px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 400ms var(--ease), border-color 400ms var(--ease);
+  position: relative;
+  overflow: hidden;
+}
+.overview-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--hairline-2);
+}
+.overview-card__num {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  background: oklch(0.92 0.008 70);
+  padding: 3px 8px;
+  border-radius: 5px;
+  width: max-content;
+}
+.overview-card__model {
+  font-family: 'Geist', sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.overview-card__skill {
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  color: var(--ink-mute);
+  letter-spacing: 0;
+}
+.overview-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: top center;
+  border: 1px solid var(--hairline);
+  background: oklch(0.94 0.005 75);
+  margin-top: 4px;
+}
+.overview-card--intro {
+  background: var(--ink);
+  color: oklch(0.95 0.005 75);
+  border-color: var(--ink);
+}
+.overview-card--intro .overview-card__num {
+  background: oklch(0.95 0.005 75 / 0.1);
+  color: oklch(0.95 0.005 75);
+}
+.overview-card--intro .overview-card__model { color: oklch(0.95 0.005 75); }
+.overview-card--intro .overview-card__skill { color: oklch(0.7 0.005 70); }
+
+.overview-page h2 {
+  font-family: 'Geist', sans-serif;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  margin-bottom: 0.75rem;
+}
+.overview-page pre {
+  background: var(--ink);
+  color: oklch(0.95 0.005 75);
+  border-radius: 12px;
+  padding: 1rem 1.25rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 13px;
+  margin-bottom: 1rem;
+  overflow: auto;
+}
+.overview-page p, .overview-page li {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--ink-mute);
+}
+.overview-page code {
+  font-family: 'Geist Mono', monospace;
+  background: oklch(0.92 0.008 70);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: 12.5px;
+  color: var(--ink);
+}
+
+/* ============================================================
+   SLIDE NAV HINT (only in interactive mode)
+   ============================================================ */
+.nav-hint {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  font-family: 'Geist Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--hairline-2);
+  padding: 6px 12px;
+  border-radius: 999px;
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  pointer-events: none;
+  opacity: 0.7;
+}
+body.is-capture .nav-hint { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}

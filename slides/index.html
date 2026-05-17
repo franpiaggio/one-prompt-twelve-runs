@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Slides overview — One prompt, twelve renderings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="overview-page">
+  <main>
+    <h1>Slides</h1>
+    <p class="lede">
+      Thirteen 1080 × 1080 squares ready for LinkedIn carousel.
+      <a href="slide.html?n=1">Open the deck</a> (← → to navigate),
+      or export every slide as a PNG with the script below.
+    </p>
+
+    <div class="overview-grid" id="overview-grid"></div>
+
+    <h2>Export to PNG</h2>
+    <p>From the repo root, with a static server running on <code>http://localhost:4000</code>:</p>
+    <pre>cd slides &amp;&amp; bash capture.sh</pre>
+    <p>Outputs <code>slide-01.png</code> through <code>slide-13.png</code> into <code>slides/exports/</code>, each at exact 1080 × 1080 pixels. Upload them to LinkedIn as a multi-image post; they'll render as a carousel in the feed order.</p>
+  </main>
+
+  <script src="data.js"></script>
+  <script>
+    const grid = document.getElementById('overview-grid');
+    grid.innerHTML = window.SLIDES_DATA.slides.map((s, i) => {
+      const n = i + 1;
+      const num = String(n).padStart(2, '0');
+      if (s.kind === 'intro') {
+        return `<a class="overview-card overview-card--intro" href="slide.html?n=${n}">
+          <span class="overview-card__num">${num}</span>
+          <span class="overview-card__model">Intro</span>
+          <span class="overview-card__skill">title + stats</span>
+        </a>`;
+      }
+      return `<a class="overview-card" href="slide.html?n=${n}">
+        <span class="overview-card__num">${num}</span>
+        <span class="overview-card__model">${s.model}</span>
+        <span class="overview-card__skill">${s.skill}</span>
+        <img src="../previews/${encodeURIComponent(s.folder)}.png" alt="" loading="lazy" />
+      </a>`;
+    }).join('');
+  </script>
+</body>
+</html>

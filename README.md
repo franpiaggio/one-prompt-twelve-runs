@@ -43,7 +43,7 @@ Content hierarchy:
 
 Output requirements:
 - Place the site in a dedicated folder.
-- In that same folder, create a README with the Claude model used and the skill, if any.
+- In that same folder, create a README documenting the model used and the skill, if any.
 ```
 
 The full prompt lives in [`website-demo.md`](./website-demo.md).

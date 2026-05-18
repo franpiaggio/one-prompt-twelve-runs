@@ -30,6 +30,6 @@ Meta description: *Frontend engineer and creative coder from Buenos Aires, Argen
 
 **Output requirements:**
 - Place the site files in a dedicated folder.
-- In that same folder, also create a `README.md` containing:
-  - The Claude model used (e.g. *claude-opus-4-7*, *claude-sonnet-4-6*).
-  - The skill used to generate the site, if any (e.g. *frontend-design*, *ui-ux-pro-max*, *high-end-visual-design*). If none was used, state *"no skill — bare Claude"*.
+- In that same folder, also create a `README.md` documenting:
+  - The model used to generate the site.
+  - The skill used to generate the site, if any. If none was used, state *"no skill, bare"*.
